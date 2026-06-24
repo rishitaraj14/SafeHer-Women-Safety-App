@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SafeHer – Women Safety Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor-outer" id="cursorOuter"></div>
+<div class="cursor-inner" id="cursorInner"></div>
+
+<!-- Particle Canvas -->
+<canvas id="particleCanvas"></canvas>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-brand">
+    <span class="brand-icon">🌸</span>
+    <span class="brand-text">SafeHer</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#home" class="nav-link active">Home</a></li>
+    <li><a href="#sos" class="nav-link">SOS</a></li>
+    <li><a href="#contacts" class="nav-link">Contacts</a></li>
+    <li><a href="#helplines" class="nav-link">Helplines</a></li>
+    <li><a href="#report" class="nav-link">Report</a></li>
+    <li><a href="#resources" class="nav-link">Resources</a></li>
+  </ul>
+  <button class="nav-sos-btn" onclick="triggerSOS()">🆘 SOS</button>
+  <button class="nav-toggle" id="navToggle">☰</button>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero" id="home">
+  <div class="hero-3d-scene">
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+    <div class="floating-orb orb-3"></div>
+    <div class="grid-plane"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">🛡️ India's Women Safety Platform</div>
+    <h1 class="hero-title">
+      You Are Never
+      <span class="gradient-text">Alone</span>
+    </h1>
+    <p class="hero-subtitle">
+      Real-time SOS alerts · Trusted contacts · Anonymous reporting ·
+      24/7 helplines — all in one safe space built for every woman in India.
+    </p>
+    <div class="hero-actions">
+      <button class="sos-main-btn pulse-ring" onclick="triggerSOS()" id="mainSOSBtn">
+        <span class="sos-inner">
+          <span class="sos-icon">🆘</span>
+          <span class="sos-label">EMERGENCY SOS</span>
+          <span class="sos-sub">Hold for immediate help</span>
+        </span>
+      </button>
+      <a href="#report" class="btn-secondary">Report Incident</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card glass-card">
+        <span class="stat-num" id="statSOS">0</span>
+        <span class="stat-label">SOS Alerts</span>
+      </div>
+      <div class="stat-card glass-card">
+        <span class="stat-num" id="statIncidents">0</span>
+        <span class="stat-label">Reports Filed</span>
+      </div>
+      <div class="stat-card glass-card">
+        <span class="stat-num">8</span>
+        <span class="stat-label">Helplines</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="silhouette-scene">
+      <div class="world-map-bg"></div>
+      <div class="silhouette sil-1"></div>
+      <div class="silhouette sil-2"></div>
+      <div class="silhouette sil-3"></div>
+      <div class="silhouette sil-4"></div>
+      <div class="silhouette sil-5"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOS SECTION -->
+<section class="section" id="sos">
+  <div class="section-header">
+    <span class="section-badge">Emergency</span>
+    <h2 class="section-title">SOS <span class="gradient-text">Alert System</span></h2>
+    <p class="section-desc">One tap sends your live location to all trusted contacts and alerts nearby authorities</p>
+  </div>
+  <div class="sos-grid">
+    <div class="sos-center-card glass-card-dark tilt-card">
+      <div class="sos-ring-container">
+        <div class="sos-ring r1"></div>
+        <div class="sos-ring r2"></div>
+        <div class="sos-ring r3"></div>
+        <button class="sos-big-btn" onclick="triggerSOS()" id="sosBigBtn">
+          <span class="sos-big-icon">🆘</span>
+          <span>SEND SOS</span>
+        </button>
+      </div>
+      <p class="sos-tip">Your location will be shared instantly</p>
+      <div class="location-display glass-card" id="locationDisplay">
+        <span>📍</span>
+        <span id="locationText">Click SOS to detect location</span>
+      </div>
+    </div>
+    <div class="sos-info-col">
+      <div class="info-card glass-card tilt-card">
+        <div class="info-icon">📡</div>
+        <h3>Live Location Sharing</h3>
+        <p>Your GPS coordinates are sent in real-time to all trusted contacts with a Google Maps link</p>
+      </div>
+      <div class="info-card glass-card tilt-card">
+        <div class="info-icon">📱</div>
+        <h3>Instant Notifications</h3>
+        <p>SMS & email alerts dispatched to your contacts within seconds of pressing SOS</p>
+      </div>
+      <div class="info-card glass-card tilt-card">
+        <div class="info-icon">🔊</div>
+        <h3>Alarm Mode</h3>
+        <p>Loud siren activates on your device to deter attackers and attract attention</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOS Status Modal -->
+  <div class="modal" id="sosModal">
+    <div class="modal-box glass-card-dark">
+      <div class="modal-sos-anim">
+        <div class="pulse-circle"></div>
+        <span class="modal-icon">🚨</span>
+      </div>
+      <h2 class="modal-title">SOS ALERT SENT!</h2>
+      <p class="modal-msg" id="modalMsg">Notifying your trusted contacts...</p>
+      <div class="modal-details" id="modalDetails"></div>
+      <div class="modal-actions">
+        <button class="btn-danger" onclick="closeModal()">I'm Safe Now</button>
+        <button class="btn-secondary" onclick="callPolice()">📞 Call Police (100)</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUSTED CONTACTS -->
+<section class="section section-alt" id="contacts">
+  <div class="section-header">
+    <span class="section-badge">Safety Network</span>
+    <h2 class="section-title">Trusted <span class="gradient-text">Contacts</span></h2>
+    <p class="section-desc">Add people who will receive your SOS alerts immediately</p>
+  </div>
+  <div class="contacts-wrapper">
+    <div class="add-contact-card glass-card-dark tilt-card">
+      <h3>Add Trusted Contact</h3>
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" class="form-input" id="contactName" placeholder="e.g. Mom, Sister, Friend" />
+      </div>
+      <div class="form-group">
+        <label>Phone Number *</label>
+        <input type="tel" class="form-input" id="contactPhone" placeholder="+91 98765 43210" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" class="form-input" id="contactEmail" placeholder="email@example.com" />
+      </div>
+      <div class="form-group">
+        <label>Relation</label>
+        <select class="form-input" id="contactRelation">
+          <option value="Mother">Mother</option>
+          <option value="Father">Father</option>
+          <option value="Sister">Sister</option>
+          <option value="Brother">Brother</option>
+          <option value="Friend">Friend</option>
+          <option value="Partner">Partner</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <button class="btn-primary full-width" onclick="addContact()">Add Contact 💜</button>
+      <div class="form-msg" id="contactMsg"></div>
+    </div>
+    <div class="contacts-list-col">
+      <div class="contacts-list" id="contactsList">
+        <div class="empty-state">
+          <span class="empty-icon">👥</span>
+          <p>No contacts yet. Add your first trusted contact →</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HELPLINES -->
+<section class="section" id="helplines">
+  <div class="section-header">
+    <span class="section-badge">India Helplines</span>
+    <h2 class="section-title">24/7 <span class="gradient-text">Emergency Lines</span></h2>
+    <p class="section-desc">Official government and national helplines — one tap to call</p>
+  </div>
+  <div class="helplines-grid" id="helplinesGrid">
+    <div class="loading-pulse">Loading helplines...</div>
+  </div>
+</section>
+
+<!-- REPORT INCIDENT -->
+<section class="section section-alt" id="report">
+  <div class="section-header">
+    <span class="section-badge">Anonymous & Secure</span>
+    <h2 class="section-title">Report an <span class="gradient-text">Incident</span></h2>
+    <p class="section-desc">Report safely and anonymously. Your identity is protected. Every report helps make communities safer.</p>
+  </div>
+  <div class="report-wrapper">
+    <div class="report-card glass-card-dark tilt-card">
+      <div class="anon-badge">🔒 Anonymous by default</div>
+      <div class="form-group">
+        <label>Incident Type *</label>
+        <select class="form-input" id="incidentType">
+          <option value="">Select type...</option>
+          <option value="Harassment">Street Harassment</option>
+          <option value="Stalking">Stalking</option>
+          <option value="Domestic Violence">Domestic Violence</option>
+          <option value="Cyber Crime">Cyber Crime / Online Harassment</option>
+          <option value="Assault">Assault</option>
+          <option value="Trafficking">Human Trafficking</option>
+          <option value="Workplace Harassment">Workplace Harassment</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Location of Incident</label>
+        <input type="text" class="form-input" id="incidentLocation" placeholder="Area, City (optional)" />
+      </div>
+      <div class="form-group">
+        <label>Description *</label>
+        <textarea class="form-input form-textarea" id="incidentDesc" placeholder="Describe what happened (only you can see this). Be as detailed as you feel comfortable with..."></textarea>
+      </div>
+      <div class="toggle-row">
+        <label class="toggle-label">
+          <input type="checkbox" id="anonymousToggle" checked />
+          <span class="toggle-slider"></span>
+          <span>Report Anonymously</span>
+        </label>
+      </div>
+      <button class="btn-primary full-width" onclick="submitReport()">Submit Report 📋</button>
+      <div class="form-msg" id="reportMsg"></div>
+    </div>
+    <div class="report-info-col">
+      <div class="why-report glass-card tilt-card">
+        <h3>Why Report?</h3>
+        <ul class="why-list">
+          <li>📊 Data helps authorities identify hotspots</li>
+          <li>🏛️ Your report can prevent future incidents</li>
+          <li>👁️ Pattern detection helps police act faster</li>
+          <li>💜 You might help someone in the same situation</li>
+          <li>🔒 100% anonymous — no identity revealed</li>
+        </ul>
+      </div>
+      <div class="report-count-card glass-card tilt-card">
+        <span class="big-count" id="incidentCount">0</span>
+        <span class="count-label">Incidents reported on SafeHer</span>
+        <p>Every report contributes to a safer India</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCES SECTION -->
+<section class="section" id="resources">
+  <div class="section-header">
+    <span class="section-badge">Stay Informed</span>
+    <h2 class="section-title">Safety <span class="gradient-text">Resources</span></h2>
+    <p class="section-desc">Knowledge is power — essential safety tips and legal rights for every woman</p>
+  </div>
+  <div class="resources-grid">
+    <div class="resource-card glass-card tilt-card">
+      <div class="resource-icon">⚖️</div>
+      <h3>Know Your Rights</h3>
+      <ul class="resource-list">
+        <li>IPC Section 354 – Assault on women</li>
+        <li>IPC Section 376 – Rape & sexual assault</li>
+        <li>POCSO Act – Child protection</li>
+        <li>Domestic Violence Act 2005</li>
+        <li>Sexual Harassment at Workplace Act</li>
+      </ul>
+    </div>
+    <div class="resource-card glass-card tilt-card">
+      <div class="resource-icon">🛡️</div>
+      <h3>Safety Tips</h3>
+      <ul class="resource-list">
+        <li>Share live location with trusted contacts</li>
+        <li>Avoid isolated areas at night</li>
+        <li>Keep emergency numbers saved offline</li>
+        <li>Trust your instincts — leave if unsafe</li>
+        <li>Take self-defence classes if possible</li>
+      </ul>
+    </div>
+    <div class="resource-card glass-card tilt-card">
+      <div class="resource-icon">📱</div>
+      <h3>Digital Safety</h3>
+      <ul class="resource-list">
+        <li>Review app permissions regularly</li>
+        <li>Use strong, unique passwords</li>
+        <li>Avoid sharing location on social media</li>
+        <li>Report cyber crime at cybercrime.gov.in</li>
+        <li>Block & document harassment online</li>
+      </ul>
+    </div>
+    <div class="resource-card glass-card tilt-card">
+      <div class="resource-icon">🏃‍♀️</div>
+      <h3>Self-Defence Basics</h3>
+      <ul class="resource-list">
+        <li>Palm strike to the nose — disorienting</li>
+        <li>Knee to the groin — effective escape</li>
+        <li>Shout "FIRE!" — attracts more attention</li>
+        <li>Carry pepper spray (legal in India)</li>
+        <li>Target eyes, nose, throat, groin</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FAKE CALL FEATURE -->
+<div class="fake-call-btn" onclick="triggerFakeCall()" title="Fake Call — escape danger">
+  📞 Fake Call
+</div>
+
+<!-- Fake Call Overlay -->
+<div class="fake-call-overlay" id="fakeCallOverlay">
+  <div class="fake-phone glass-card-dark">
+    <div class="call-header">Incoming Call</div>
+    <div class="caller-avatar">👩</div>
+    <div class="caller-name" id="callerName">Mom</div>
+    <div class="caller-sub">SafeHer Emergency Call</div>
+    <div class="call-actions">
+      <button class="call-btn decline" onclick="endFakeCall()">📵</button>
+      <button class="call-btn accept" onclick="endFakeCall()">📞</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <span class="brand-icon">🌸</span>
+      <span class="brand-text">SafeHer</span>
+      <p>Built with 💜 for women's safety across India</p>
+    </div>
+    <div class="footer-links">
+      <h4>Quick Actions</h4>
+      <a href="tel:1091">📞 Women Helpline: 1091</a>
+      <a href="tel:100">📞 Police: 100</a>
+      <a href="tel:108">📞 Ambulance: 108</a>
+    </div>
+    <div class="footer-links">
+      <h4>Platform</h4>
+      <a href="#sos">SOS Alert</a>
+      <a href="#contacts">Trusted Contacts</a>
+      <a href="#report">Report Incident</a>
+      <a href="#resources">Resources</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>🔒 Your data is encrypted and protected. SafeHer never shares your information without consent.</p>
+    <p>Built for SDG 5 – Gender Equality | © 2026 SafeHer</p>
+  </div>
+</footer>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast"></div>
+
+<script src="particles.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
