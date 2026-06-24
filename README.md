@@ -2,6 +2,8 @@
 
 A full-stack women's safety web application built with Node.js + Express backend and a 3D animated frontend.
 
+Live demo: https://sparkling-praline-3660e7.netlify.app/
+
 ## Features
 - 🆘 **SOS Emergency Alert** – one-tap alert with live GPS location sent to trusted contacts
 - 👥 **Trusted Contacts** – manage your safety network
